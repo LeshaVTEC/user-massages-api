@@ -2,6 +2,9 @@ package by.it_academy.team1.usermassages.service.api;
 
 import by.it_academy.team1.usermassages.core.dto.UserLoginDto;
 
+/**
+ * @author qeliathus@gmail.com
+ */
 public interface IUserLoginService {
 
     /**
