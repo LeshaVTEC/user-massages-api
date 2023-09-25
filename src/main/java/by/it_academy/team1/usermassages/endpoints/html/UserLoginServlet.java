@@ -6,12 +6,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-/**
- * @author qeliathus@gmail.com
- */
 public class UserLoginServlet extends HttpServlet {
 
     private static final String USER_PARAM_USERNAME = "username";
@@ -33,6 +31,7 @@ public class UserLoginServlet extends HttpServlet {
 
         userLoginService.authenticate(userLoginDto);
 
-
+        HttpSession session = req.getSession();
+        session.setAttribute("user", userLoginDto.getUsername());
     }
 }
