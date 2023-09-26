@@ -31,7 +31,7 @@ public class MessageServlet extends HttpServlet {
         try{
             String currentUser = (String) session.getAttribute("user");
             req.setAttribute("messages", this.messageService.getMessagesOfUser(currentUser));
-            req.getRequestDispatcher("/ui/user/chats.jsp").forward(req, resp);
+            req.getRequestDispatcher("/template/ui/user/chats/").forward(req, resp);
         } catch (UserNotFoundException e){
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             resp.getWriter().write(e.getMessage());
