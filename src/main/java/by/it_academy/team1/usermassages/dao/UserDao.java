@@ -6,21 +6,18 @@ import by.it_academy.team1.usermassages.dao.api.IUserDao;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 
 public class UserDao implements IUserDao {
 
-    private static volatile UserDao instance;
+    private static Map<Integer, User> registrationUsers = new HashMap<>(
 
-    public static UserDao getInstance() {
-        if (instance == null) {
-            synchronized (UserDao.class){
-                if (instance == null) {
-                    instance = new UserDao();
-                }
-            }
-        } return instance;
-    }
+            Map.of(
+            0, createAdmin()
+    ));
+
+
     private static User createAdmin() {
         User admin = new User();
         admin.setUsername("Admin");
@@ -32,12 +29,11 @@ public class UserDao implements IUserDao {
         return admin;
     }
 
-    private Map<Integer, User> registrationUsers = Map.of(
-            0, createAdmin()
-    );
-
-    private UserDao(){
+    public static Map<Integer, User> getRegistrationUsers() {
+        return registrationUsers;
     }
+
+
     @Override
     public void saveNewUser(User user) {
         Integer key = 1;
@@ -50,4 +46,5 @@ public class UserDao implements IUserDao {
         // TODO: implement by qeliathus@gmail.com
         return null;
     }
+
 }

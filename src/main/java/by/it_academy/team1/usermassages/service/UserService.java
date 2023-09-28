@@ -6,9 +6,27 @@ import by.it_academy.team1.usermassages.dao.UserDao;
 import by.it_academy.team1.usermassages.dao.api.IUserDao;
 import by.it_academy.team1.usermassages.service.api.IUserService;
 
+import java.util.Map;
+
 public class UserService implements IUserService {
 
-    IUserDao userDao = UserDao.getInstance();
+    private static boolean uniquenessLoginCheck(String username) {
+        Map<Integer, User> map = UserDao.getRegistrationUsers();
+
+        for (Map.Entry<Integer, User> entry : map.entrySet()) {
+
+            if (entry.getValue().getUsername().equals(username)) {
+
+                throw new IllegalArgumentException("Данный Логин уже зарегистрирован, попробуйте другой Логин");
+            }
+        } return true;
+    }
+
+    private IUserDao userDao;
+    public UserService(IUserDao userDao) {
+        this.userDao = userDao;
+    }
+
     @Override
     public void saveNewUser(UserRegistrationDto dto) {
         if (dto == null) {
@@ -23,6 +41,9 @@ public class UserService implements IUserService {
         } else if (dto.getBirthday() == null) {
             throw new IllegalArgumentException("Нет информации о дате рождения");
         }
+        if (UserService.uniquenessLoginCheck(dto.getUsername()))
         userDao.saveNewUser(new User(dto.getUsername(), dto.getPassword(), dto.getFullName(), dto.getBirthday()));
     }
+
+
 }

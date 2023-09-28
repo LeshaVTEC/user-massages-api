@@ -4,5 +4,15 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          metadata-complete="false"
          version="5.0">
-    <display-name> Vote App</display-name>
+    <display-name>by.it_academy.team1.usermessage</display-name>
+
+    <servlet>
+        <servlet-name>jsp-servlet</servlet-name>
+        <servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jsp-servlet</servlet-name>
+        <url-pattern>*.jsp</url-pattern>
+    </servlet-mapping>
+
 </web-app>
