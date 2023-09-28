@@ -48,7 +48,7 @@
                         </resource>
                     </webResources>
                     <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-                    <warName>user-message##${version}</warName>
+                    <warName>user-messages-api##${version}</warName>
                 </configuration>
             </plugin>
         </plugins>
