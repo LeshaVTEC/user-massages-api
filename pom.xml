@@ -22,6 +22,11 @@
             <version>5.0.0</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+            <version>2.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -37,7 +42,7 @@
                         </resource>
                     </webResources>
                     <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
-                    <warName>vote-app##${version}</warName>
+                    <warName>user-messages-api##${version}</warName>
                 </configuration>
             </plugin>
         </plugins>
