@@ -3,7 +3,6 @@ package by.it_academy.team1.usermassages.dao;
 import by.it_academy.team1.usermassages.core.entity.User;
 import by.it_academy.team1.usermassages.core.entity.UserRole;
 import by.it_academy.team1.usermassages.dao.api.IUserDao;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -47,7 +46,11 @@ public class UserDao implements IUserDao {
 
     @Override
     public User findUser(String username) {
-        // TODO: implement by qeliathus@gmail.com
+        for (Map.Entry<Integer, User> entry : registrationUsers.entrySet()) {
+            if (entry.getValue().getUsername().equals(username)) {
+                return entry.getValue();
+            }
+        }
         return null;
     }
 }
