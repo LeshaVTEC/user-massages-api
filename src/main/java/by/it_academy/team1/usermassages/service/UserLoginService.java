@@ -5,6 +5,7 @@ import by.it_academy.team1.usermassages.core.entity.User;
 import by.it_academy.team1.usermassages.core.exceptions.UserNotFoundException;
 import by.it_academy.team1.usermassages.dao.UserDao;
 import by.it_academy.team1.usermassages.dao.api.IUserDao;
+import by.it_academy.team1.usermassages.dao.factory.UserDaoFactory;
 import by.it_academy.team1.usermassages.service.api.IUserLoginService;
 
 public class UserLoginService implements IUserLoginService {
@@ -22,7 +23,7 @@ public class UserLoginService implements IUserLoginService {
         return instance;
     }
 
-    IUserDao userDao = UserDao.getInstance();
+    IUserDao userDao = UserDaoFactory.getInstance();
 
     @Override
     public void authenticate(UserLoginDto dto) {

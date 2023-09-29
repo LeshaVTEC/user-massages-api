@@ -28,7 +28,8 @@ public class UserDao implements IUserDao {
         return admin;
     }
 
-    public static Map<Integer, User> getRegistrationUsers() {
+    @Override
+    public Map<Integer, User> getRegistrationUsers() {
         return registrationUsers;
     }
 
