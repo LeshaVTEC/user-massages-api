@@ -1,4 +1,4 @@
-package by.it_academy.team1.usermassages.listeners;
+package by.it_academy.team1.usermessages.listeners;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSessionEvent;

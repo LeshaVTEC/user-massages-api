@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @author makatrov_anton@mail.ru
  */
-public interface IMessageService extends ICRUDService<Message>{
+public interface IMessageService extends ICRUDService<Message> {
     List<Message> getMessagesOfUser(String username);
 
     void sendMessage(MessageDto message);

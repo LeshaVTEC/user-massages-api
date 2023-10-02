@@ -1,8 +1,8 @@
-package by.it_academy.team1.usermassages.service.factory;
+package by.it_academy.team1.usermessages.service.factory;
 
-import by.it_academy.team1.usermassages.dao.factory.UserDaoFactory;
-import by.it_academy.team1.usermassages.service.UserService;
-import by.it_academy.team1.usermassages.service.api.IUserService;
+import by.it_academy.team1.usermessages.dao.factory.UserDaoFactory;
+import by.it_academy.team1.usermessages.service.UserService;
+import by.it_academy.team1.usermessages.service.api.IUserService;
 
 public class UserServiceFactory {
 

@@ -11,6 +11,6 @@
 </head>
 <body>
 <h1>Главная страница</h1>
-<a href="http://localhost:8080/user-message/template/ui/signUp/index.jsp">Зарегистрируйтесть</a>
+<a href="http://localhost:8080/user-messages-api/template/ui/signUp/index.jsp">Зарегистрируйтесть</a>
 </body>
 </html>

@@ -1,12 +1,11 @@
 package by.it_academy.team1.usermessages.service;
 
-import by.it_academy.team1.usermassages.core.dto.UserLoginDto;
-import by.it_academy.team1.usermassages.core.entity.User;
-import by.it_academy.team1.usermassages.core.exceptions.UserNotFoundException;
-import by.it_academy.team1.usermassages.dao.UserDao;
-import by.it_academy.team1.usermassages.dao.api.IUserDao;
-import by.it_academy.team1.usermassages.dao.factory.UserDaoFactory;
-import by.it_academy.team1.usermassages.service.api.IUserLoginService;
+import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
+import by.it_academy.team1.usermessages.core.entity.User;
+import by.it_academy.team1.usermessages.core.exceptions.UserNotFoundException;
+import by.it_academy.team1.usermessages.dao.api.IUserDao;
+import by.it_academy.team1.usermessages.dao.factory.UserDaoFactory;
+import by.it_academy.team1.usermessages.service.api.IUserLoginService;
 
 public class UserLoginService implements IUserLoginService {
 

@@ -1,8 +1,8 @@
 package by.it_academy.team1.usermessages.endpoints.html;
 
-import by.it_academy.team1.usermassages.core.dto.UserRegistrationDto;
-import by.it_academy.team1.usermassages.service.api.IUserService;
-import by.it_academy.team1.usermassages.service.factory.UserServiceFactory;
+import by.it_academy.team1.usermessages.core.dto.UserRegistrationDto;
+import by.it_academy.team1.usermessages.service.api.IUserService;
+import by.it_academy.team1.usermessages.service.factory.UserServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -46,7 +46,7 @@ public class UserServlet extends HttpServlet {
         userRegistrationDto.setBirthday(birthday);
 
         userService.saveNewUser(userRegistrationDto);
-        resp.sendRedirect("/user-message/template/ui/signUp");
+        resp.sendRedirect("/user-messages-api/template/ui/signIn");
         resp.setStatus(201);
     }
 }

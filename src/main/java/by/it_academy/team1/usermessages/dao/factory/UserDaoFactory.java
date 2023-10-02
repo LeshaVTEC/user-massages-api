@@ -1,7 +1,7 @@
-package by.it_academy.team1.usermassages.dao.factory;
+package by.it_academy.team1.usermessages.dao.factory;
 
-import by.it_academy.team1.usermassages.dao.UserDao;
-import by.it_academy.team1.usermassages.dao.api.IUserDao;
+import by.it_academy.team1.usermessages.dao.UserDao;
+import by.it_academy.team1.usermessages.dao.api.IUserDao;
 
 public class UserDaoFactory {
     private volatile static UserDao instance;

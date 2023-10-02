@@ -1,9 +1,9 @@
 package by.it_academy.team1.usermessages.service;
 
-import by.it_academy.team1.usermassages.core.dto.UserRegistrationDto;
-import by.it_academy.team1.usermassages.core.entity.User;
-import by.it_academy.team1.usermassages.dao.api.IUserDao;
-import by.it_academy.team1.usermassages.service.api.IUserService;
+import by.it_academy.team1.usermessages.core.dto.UserRegistrationDto;
+import by.it_academy.team1.usermessages.core.entity.User;
+import by.it_academy.team1.usermessages.dao.api.IUserDao;
+import by.it_academy.team1.usermessages.service.api.IUserService;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;

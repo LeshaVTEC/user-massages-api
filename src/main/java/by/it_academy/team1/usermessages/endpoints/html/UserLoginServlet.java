@@ -3,6 +3,7 @@ package by.it_academy.team1.usermessages.endpoints.html;
 import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
 import by.it_academy.team1.usermessages.service.UserLoginService;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+@WebServlet(urlPatterns = "/api/login")
 public class UserLoginServlet extends HttpServlet {
 
     private static final String USER_PARAM_USERNAME = "username";
@@ -32,6 +34,9 @@ public class UserLoginServlet extends HttpServlet {
         userLoginService.authenticate(userLoginDto);
 
         HttpSession session = req.getSession();
-        session.setAttribute("user", userLoginDto.getUsername());
+        session.setAttribute("user", userLoginDto);
+
+        resp.sendRedirect("/user-messages-api/template/ui/user/message");
+        resp.setStatus(200);
     }
 }

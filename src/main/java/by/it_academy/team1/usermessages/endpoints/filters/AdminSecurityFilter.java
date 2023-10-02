@@ -1,5 +1,6 @@
 package by.it_academy.team1.usermessages.endpoints.filters;
 
+import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
 import by.it_academy.team1.usermessages.core.entity.User;
 import by.it_academy.team1.usermessages.core.entity.UserRole;
 import jakarta.servlet.*;
@@ -21,16 +22,16 @@ public class AdminSecurityFilter implements Filter {
 
         if ((session != null) && (session.getAttribute("user") != null)) {
 
-            User user = (User) session.getAttribute("user");
+            UserLoginDto user = (UserLoginDto) session.getAttribute("user");
 
-            if (user.getRole() == UserRole.ADMIN) {
+            if (user.getUsername().equals("Admin")) {
                 chain.doFilter(request, response);
             } else {
                 resp.sendRedirect(contextPath + "/");
             }
 
         } else {
-            resp.sendRedirect(contextPath + "/");
+            resp.sendRedirect(contextPath + "template/ui/signIn");
         }
     }
 }
