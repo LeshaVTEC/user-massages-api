@@ -20,6 +20,10 @@ public class MessageDto {
         this.sentDate = sentDate;
     }
 
+    public void setSentDate(LocalDateTime sentDate) {
+        this.sentDate = sentDate;
+    }
+
     public LocalDateTime getSentDate() {
         return sentDate;
     }
