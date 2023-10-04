@@ -10,5 +10,5 @@ public interface IUserService {
      * @param dto DTO with User credentials
      */
     void saveNewUser(UserRegistrationDto dto);
-    boolean uniquenessLoginCheck(String username);
+
 }

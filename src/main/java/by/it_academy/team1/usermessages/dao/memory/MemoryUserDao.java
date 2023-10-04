@@ -1,4 +1,4 @@
-package by.it_academy.team1.usermessages.dao;
+package by.it_academy.team1.usermessages.dao.memory;
 
 import by.it_academy.team1.usermessages.core.entity.User;
 import by.it_academy.team1.usermessages.core.entity.UserRole;
@@ -8,10 +8,9 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UserDao implements IUserDao {
+public class MemoryUserDao implements IUserDao {
 
     private static Map<Integer, User> registrationUsers = new HashMap<>(
-
             Map.of(
             0, createAdmin()
     ));
@@ -51,4 +50,11 @@ public class UserDao implements IUserDao {
         return null;
     }
 
+    @Override
+    public Boolean existsByUsername(String username) {
+        return registrationUsers
+                .entrySet()
+                .stream()
+                .anyMatch(it -> username.equals(it.getValue().getUsername()));
+    }
 }

@@ -1,7 +1,7 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
 import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
-import by.it_academy.team1.usermessages.service.UserLoginService;
+import by.it_academy.team1.usermessages.service.memory.MemoryUserLoginService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,12 +12,12 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/api/login")
-public class UserLoginServlet extends HttpServlet {
+public class MemoryUserLoginServlet extends HttpServlet {
 
     private static final String USER_PARAM_USERNAME = "username";
     private static final String USER_PARAM_PASSWORD = "password";
 
-    UserLoginService userLoginService = UserLoginService.getInstance();
+    MemoryUserLoginService userLoginService = MemoryUserLoginService.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

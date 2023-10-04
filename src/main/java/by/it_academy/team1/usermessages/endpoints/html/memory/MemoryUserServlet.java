@@ -1,8 +1,8 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
 import by.it_academy.team1.usermessages.core.dto.UserRegistrationDto;
 import by.it_academy.team1.usermessages.service.api.IUserService;
-import by.it_academy.team1.usermessages.service.factory.UserServiceFactory;
+import by.it_academy.team1.usermessages.service.memory.factory.MemoryUserServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,14 +14,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 @WebServlet(urlPatterns = "/api/user")
-public class UserServlet extends HttpServlet {
+public class MemoryUserServlet extends HttpServlet {
 
     private static final String USER_PARAM_USERNAME = "username";
     private static final String USER_PARAM_PASSWORD = "password";
     private static final String USER_PARAM_FULLNAME = "fullName";
     private static final String USER_PARAM_BIRTHDAY = "birthday";
 
-    IUserService userService = UserServiceFactory.getInstance();
+    IUserService userService = MemoryUserServiceFactory.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

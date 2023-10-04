@@ -1,9 +1,9 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
 import by.it_academy.team1.usermessages.core.dto.MessageDto;
 import by.it_academy.team1.usermessages.core.exceptions.UserNotFoundException;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
-import by.it_academy.team1.usermessages.service.factory.MessageServiceFactory;
+import by.it_academy.team1.usermessages.service.memory.factory.MemoryMessageServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,9 +18,9 @@ import java.io.IOException;
  */
 
 @WebServlet("/api/message")
-public class MessageServlet extends HttpServlet {
+public class MemoryMessageServlet extends HttpServlet {
 
-    private IMessageService messageService = MessageServiceFactory.getInstance();
+    private IMessageService messageService = MemoryMessageServiceFactory.getInstance();
     private static final String RECIPIENT_PARAM_NAME = "recipient";
     private static final String MESSAGE_TEXT_PARAM_NAME = "messageText";
 

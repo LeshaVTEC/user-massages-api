@@ -1,8 +1,10 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
-import by.it_academy.team1.usermessages.dao.factory.MessageDaoFactory;
-import by.it_academy.team1.usermessages.dao.factory.UserDaoFactory;
-import by.it_academy.team1.usermessages.dao.api.*;
+import by.it_academy.team1.usermessages.dao.api.IMessageDao;
+import by.it_academy.team1.usermessages.dao.api.IUserDao;
+import by.it_academy.team1.usermessages.dao.memory.factory.MemoryMessageDaoFactory;
+import by.it_academy.team1.usermessages.dao.memory.factory.MemoryUserDaoFactory;
+import by.it_academy.team1.usermessages.listeners.ActiveSessionUsersListener;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -12,10 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/api/admin/statistics")
-public class StatisticsServlet extends HttpServlet {
+public class MemoryStatisticsServlet extends HttpServlet {
 
-    private IUserDao userDao = UserDaoFactory.getInstance();
-    private IMessageDao messageDao = MessageDaoFactory.getInstance();
+    private IUserDao userDao = MemoryUserDaoFactory.getInstance();
+    private IMessageDao messageDao = MemoryMessageDaoFactory.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");

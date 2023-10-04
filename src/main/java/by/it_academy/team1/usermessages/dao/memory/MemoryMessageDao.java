@@ -1,4 +1,4 @@
-package by.it_academy.team1.usermessages.dao;
+package by.it_academy.team1.usermessages.dao.memory;
 
 import by.it_academy.team1.usermessages.core.entity.Message;
 import by.it_academy.team1.usermessages.dao.api.IMessageDao;
@@ -6,7 +6,7 @@ import by.it_academy.team1.usermessages.dao.api.IMessageDao;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageDao implements IMessageDao {
+public class MemoryMessageDao implements IMessageDao {
     private List<Message> data = new ArrayList<>();
 
     @Override
