@@ -23,23 +23,16 @@ import java.util.List;
 @WebServlet("/api/message")
 public class MessageServlet extends HttpServlet {
 
-    private IMessageService messageService = MessageServiceFactory.getInstance();
+
     private static final String RECIPIENT_PARAM_NAME = "recipient";
-    private static final String MESSAGE_TEXT_PARAM_NAME = "messageText";
+    private static final String MESSAGE_TEXT_PARAM_NAME = "text";
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
+    private final IMessageService messageService;
 
-        try{
-            UserLoginDto currentUser = (UserLoginDto) session.getAttribute("user");
-            List<Message> messages = this.messageService.getMessagesOfUser(currentUser.getUsername());
-            req.setAttribute("chat", messages);
-            req.getRequestDispatcher("/template/ui/user/chats/").forward(req, resp);
-        } catch (UserNotFoundException e){
-            resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            resp.getWriter().write(e.getMessage());
-        }
+
+    public MessageServlet() {
+        this.messageService = MessageServiceFactory.getInstance();
+
     }
 
     @Override
@@ -63,10 +56,17 @@ public class MessageServlet extends HttpServlet {
             message.setText(messageText);
 
         // Отправьте сообщение
-            messageService.sendMessage(message);
-            String contextPath = req.getContextPath();
-            resp.sendRedirect(contextPath + "/api/message");
-        // Отправьте успешный ответ
+
+
+            try{
+                this.messageService.sendMessage(message);
+                req.setAttribute("success", true);
+            } catch (IllegalArgumentException e){
+                req.setAttribute("error", true);
+                req.setAttribute("message",  e.getMessage());
+            }
+            req.getRequestDispatcher("/template/ui/user/message/").forward(req, resp);
+
             resp.setStatus(HttpServletResponse.SC_CREATED);
             } catch (UserNotFoundException e){
                 resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

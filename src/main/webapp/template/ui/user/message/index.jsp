@@ -5,22 +5,45 @@
   Time: 23:37
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!doctype html>
+<html lang="ru">
 <head>
-    <title>Отправить сообщение</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Главная страница входа</title>
 </head>
 <body>
-    <h1>Отправить сообщение</h1>
-    <form action="${pageContext.request.contextPath}/api/message" method="POST">
-        <label for="recipient">Логин кому:</label>
-        <input type="text" id="recipient" name="recipient" required><br>
-
-        <label for="messageText">Текст сообщения:</label>
-        <textarea id="messageText" name="messageText" rows="4" cols="50" required></textarea><br>
-
-        <input type="submit" value="Отправить">
-    </form>
+<c:choose>
+    <c:when test="${requestScope.success}">
+        <p style="color:green;">Сообщение успешно отправленно. Отправляй ещё раз</p>
+    </c:when>
+    <c:when test="${requestScope.error}">
+        <p style="color:red;">${requestScope.message}</p>
+    </c:when>
+</c:choose>
+<form action="${pageContext.request.contextPath}/api/message" method="POST">
+    <table>
+        <tbody>
+        <tr>
+            <td>Recipient:</td>
+            <td>
+                <input type="text" name="recipient" value="${param.recipient}">
+            </td>
+        </tr>
+        <tr>
+            <td>Text:</td>
+            <td>
+                <input type="text" name="text" value="${param.text}">
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <p><input type="submit" value="Send" /><input type="button" onclick="location.href='${pageContext.request.contextPath}/ui/user/chats';" value="Chats" /></p>
+</form>
 </body>
 </html>
