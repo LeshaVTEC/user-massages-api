@@ -15,9 +15,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ваши сообщения</title>
+    <title>Ваши сообщения  </title>
 </head>
 <body>
+<h1>Логин: <c:out value="${requestScope.username}"/> Ваши сообщения </h1>
 <table border="1">
     <tbody>
     <c:forEach items="${requestScope.chat}"
@@ -30,6 +31,7 @@
     </c:forEach>
     </tbody>
 </table>
+<p><input type="button" onclick="location.href='${pageContext.request.contextPath}/template/ui/user/message/';" value="write message" /> </p>
 
 </body>
 </html>
