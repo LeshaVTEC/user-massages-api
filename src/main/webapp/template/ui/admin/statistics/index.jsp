@@ -7,6 +7,8 @@
         <h1>Hello! This is statistics!</h1>
         <h2>Number of active users</h2>
         <%= request.getAttribute("amountActiveUsers") %>
+        <h2>Number of active users (attribute)</h2>
+        <%= request.getAttribute("amountActiveUsers_attribute") %>
         <h2>Number of registered users</h2>
         <%= request.getAttribute("amountUsers") %>
         <h2>Number of user messages:</h2>

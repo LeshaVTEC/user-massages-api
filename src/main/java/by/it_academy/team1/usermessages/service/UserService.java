@@ -19,9 +19,9 @@ public class UserService implements IUserService {
 
     @Override
     public boolean uniquenessLoginCheck(String username) {
-        Map<Integer, User> map = userDao.getRegistrationUsers();
+        Map<String, User> map = userDao.getRegistrationUsers();
 
-        for (Map.Entry<Integer, User> entry : map.entrySet()) {
+        for (Map.Entry<String, User> entry : map.entrySet()) {
 
             if (entry.getValue().getUsername().equals(username)) {
 
