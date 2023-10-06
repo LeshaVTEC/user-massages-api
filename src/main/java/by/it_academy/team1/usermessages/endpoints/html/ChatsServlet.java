@@ -27,9 +27,11 @@ public class ChatsServlet  extends HttpServlet {
 
         try{
             UserLoginDto currentUser = (UserLoginDto) session.getAttribute("user");
+
             String username = currentUser.getUsername();
             List<Message> messages = this.messageService.getMessagesOfUser(username);
             req.setAttribute("username", username);
+
             req.setAttribute("chat", messages);
             req.getRequestDispatcher("/template/ui/user/chats/").forward(req, resp);
         } catch (UserNotFoundException e){
