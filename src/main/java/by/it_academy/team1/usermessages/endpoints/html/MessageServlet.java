@@ -29,8 +29,10 @@ public class MessageServlet extends HttpServlet {
 
     private final IMessageService messageService;
 
+
     public MessageServlet() {
         this.messageService = MessageServiceFactory.getInstance();
+
     }
 
     @Override
@@ -55,6 +57,7 @@ public class MessageServlet extends HttpServlet {
 
         // Отправьте сообщение
 
+
             try{
                 this.messageService.sendMessage(message);
                 req.setAttribute("success", true);
@@ -63,7 +66,7 @@ public class MessageServlet extends HttpServlet {
                 req.setAttribute("message",  e.getMessage());
             }
             req.getRequestDispatcher("/template/ui/user/message/").forward(req, resp);
-        // Отправьте успешный ответ
+
             resp.setStatus(HttpServletResponse.SC_CREATED);
             } catch (UserNotFoundException e){
                 resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
