@@ -11,6 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
+import static by.it_academy.team1.usermessages.listeners.ActiveSessionListener.TOTAL_USERS_SESSION_KEY;
+import static by.it_academy.team1.usermessages.listeners.ActiveSessionUsersListener.TOTAL_USERS_SESSION_ATTRIBUTE_KEY;
+
 @WebServlet(urlPatterns = "/api/admin/statistics")
 public class StatisticsServlet extends HttpServlet {
 
@@ -21,10 +24,11 @@ public class StatisticsServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html; charset=UTF-8");
 
-        req.setAttribute("amountActiveUsers", req.getServletContext().getAttribute("totalusers"));
+        req.setAttribute("amountActiveUsers", req.getServletContext().getAttribute(TOTAL_USERS_SESSION_KEY));
+        req.setAttribute("amountActiveUsers_attribute", req.getServletContext().getAttribute(TOTAL_USERS_SESSION_ATTRIBUTE_KEY));
         req.setAttribute("amountUsers", userDao.getRegistrationUsers().size());
         req.setAttribute("amountMessages", messageDao.get().size());
 
-        getServletContext().getRequestDispatcher("/template/ui/admin/statistics/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/template/ui/admin/statistics/index.jsp").forward(req, resp);
     }
 }

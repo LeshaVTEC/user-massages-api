@@ -7,15 +7,16 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class UserDao implements IUserDao {
 
-    private static Map<Integer, User> registrationUsers = new HashMap<>(
+    private static Map<String, User> registrationUsers = new HashMap<>();
 
-            Map.of(
-            0, createAdmin()
-    ));
-
+    static {
+        User admin = createAdmin();
+        registrationUsers.put(admin.getUuid(), admin);
+    }
 
     private static User createAdmin() {
         User admin = new User();
@@ -29,21 +30,19 @@ public class UserDao implements IUserDao {
     }
 
    @Override
-    public Map<Integer, User> getRegistrationUsers() {
+    public Map<String, User> getRegistrationUsers() {
         return registrationUsers;
     }
 
 
     @Override
     public void saveNewUser(User user) {
-        Integer key = 1;
-        registrationUsers.put(key, user);
-        key = key + 1;
+        registrationUsers.put(user.getUuid(), user);
     }
 
     @Override
     public User findUser(String username) {
-        for (Map.Entry<Integer, User> entry : registrationUsers.entrySet()) {
+        for (Map.Entry<String, User> entry : registrationUsers.entrySet()) {
             if (entry.getValue().getUsername().equals(username)) {
                 return entry.getValue();
             }
