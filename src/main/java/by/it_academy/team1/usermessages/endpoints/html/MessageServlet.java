@@ -2,8 +2,9 @@ package by.it_academy.team1.usermessages.endpoints.html;
 
 import by.it_academy.team1.usermessages.core.dto.MessageDto;
 import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
-import by.it_academy.team1.usermessages.core.entity.Message;
+import by.it_academy.team1.usermessages.core.entity.User;
 import by.it_academy.team1.usermessages.core.exceptions.UserNotFoundException;
+import by.it_academy.team1.usermessages.dao.UserDao;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
 import by.it_academy.team1.usermessages.service.factory.MessageServiceFactory;
 import jakarta.servlet.ServletException;
@@ -14,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author makatrov_anton@mail.ru
@@ -45,17 +45,27 @@ public class MessageServlet extends HttpServlet {
         try{
 
             UserLoginDto currentUser = (UserLoginDto) session.getAttribute("user");
-        // Получите параметры из POST-запроса
+
+            // Получите параметры из POST-запроса
             String recipient = req.getParameter(RECIPIENT_PARAM_NAME);
             String messageText = req.getParameter(MESSAGE_TEXT_PARAM_NAME);
+            UserDao check = new UserDao();
+            // Проверка, зарегистрирован ли получатель
+            User recipientUser = check.findUser(recipient);
 
-        // Создайте новое сообщение
+            if (recipientUser == null) {
+                // Пользователь не зарегистрирован
+                req.setAttribute("error", true);
+                req.setAttribute("message", "Получатель не зарегистрирован");
+                req.getRequestDispatcher("/template/ui/user/message/").forward(req, resp);
+                return;
+            }
+
+            // Создайте новое сообщение
             MessageDto message = new MessageDto();
             message.setUsernameFrom(currentUser.getUsername()); // Установите отправителя как текущего пользователя
             message.setUsernameTo(recipient);
             message.setText(messageText);
-
-        // Отправьте сообщение
 
 
             try{
