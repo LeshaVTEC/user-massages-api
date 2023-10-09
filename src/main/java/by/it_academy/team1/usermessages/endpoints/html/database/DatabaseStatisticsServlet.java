@@ -22,9 +22,7 @@ public class DatabaseStatisticsServlet extends HttpServlet {
             req.setCharacterEncoding("UTF-8");
             resp.setContentType("text/html; charset=UTF-8");
 
-            req.setAttribute("amountActiveUsers", req.getServletContext().getAttribute("totalusers"));
-            req.setAttribute("amountUsers", userDao.getRegistrationUsers().size());
-            req.setAttribute("amountMessages", messageDao.get().size());
+            ;
 
             getServletContext().getRequestDispatcher("/template/database/admin/statistics/index.jsp").forward(req, resp);
         }

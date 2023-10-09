@@ -1,21 +1,28 @@
 package by.it_academy.team1.usermessages.dao.database;
 
 import by.it_academy.team1.usermessages.core.entity.User;
+import by.it_academy.team1.usermessages.core.entity.UserRole;
 import by.it_academy.team1.usermessages.dao.api.IUserDao;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DatabaseUserDao implements IUserDao {
 
+
+    @Override
     public Boolean existsByUsername(String username) {
         try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1")) {
-            String savePositionSql = "SELECT exists (SELECT 1 FROM user_messages.users WHERE username = '?');";
+            String savePositionSql = "SELECT exists (SELECT 1 FROM user_messages.users WHERE username = ?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(savePositionSql)) {
                 preparedStatement.setString(1, username);
-                preparedStatement.executeUpdate();
+                preparedStatement.execute();
                 ResultSet resultSet = preparedStatement.getResultSet();
+                resultSet.next();
                 return resultSet.getBoolean(1);
             }
         } catch (SQLException exception) {
@@ -35,8 +42,8 @@ public class DatabaseUserDao implements IUserDao {
                 preparedStatement.setString(1, user.getUsername());
                 preparedStatement.setString(2, user.getPassword());
                 preparedStatement.setString(3, user.getFullName());
-                preparedStatement.setString(4, user.getBirthday().toString());
-                preparedStatement.setString(5, user.getRegisteredDate().toString());
+                preparedStatement.setObject(4, user.getBirthday());
+                preparedStatement.setObject(5, user.getRegisteredDate());
                 preparedStatement.setString(6, user.getRole().toString());
                 preparedStatement.executeUpdate();
             }
@@ -48,12 +55,62 @@ public class DatabaseUserDao implements IUserDao {
     }
 
     @Override
-    public Map<String, User> getRegistrationUsers() { // TODO return List<user>
-        return null;
+    public Map<String, User> getRegistrationUsers() {
+        Map<String, User> registrationUsers= new HashMap();
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1")) {
+            String savePositionSql = "SELECT id, username, password, full_name, birthday, registration_date, role " +
+                    "FROM user_messages.users;";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(savePositionSql)) {
+                preparedStatement.execute();
+                ResultSet resultSet = preparedStatement.getResultSet();
+                while (resultSet.next()) {
+                    registrationUsers.put(resultSet.getString(1),
+                            new User(
+                                        resultSet.getString(1),
+                                        resultSet.getString(2),
+                                        resultSet.getString(3),
+                                        resultSet.getString(4),
+                                        resultSet.getObject(5, LocalDate.class),
+                                        resultSet.getObject(6, LocalDateTime.class),
+                                        UserRole.valueOf(resultSet.getString(7))
+                            )
+                    );
+                }
+                return registrationUsers;
+            }
+        } catch (SQLException exception) {
+            System.out.println("SQL Exception " + exception.getErrorCode());
+            System.out.println(exception.getStackTrace().toString());
+            throw new RuntimeException(exception);
+        }
     }
 
     @Override
     public User findUser(String username) {
-        return null;
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1")) {
+            String savePositionSql = "SELECT id, username, password, full_name, birthday, registration_date, role " +
+                    "FROM user_messages.users " +
+                    "WHERE username = ?;";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(savePositionSql)) {
+                preparedStatement.setString(1, username);
+                preparedStatement.execute();
+                ResultSet resultSet = preparedStatement.getResultSet();
+                resultSet.next();
+                String uuid = resultSet.getString(1);
+                String usernameDataBase = resultSet.getString(2);
+                String password = resultSet.getString(3);
+                String full_name = resultSet.getString(4);
+                LocalDate birthday =  resultSet.getObject(5, LocalDate.class);
+                LocalDateTime registration_date = resultSet.getObject(6, LocalDateTime.class);
+                UserRole role = UserRole.valueOf(resultSet.getString(7));
+
+                User user = new User(uuid, usernameDataBase, password, full_name, birthday, registration_date, role);
+                return user;
+            }
+        } catch (SQLException exception) {
+            System.out.println("SQL Exception " + exception.getErrorCode());
+            System.out.println(exception.getStackTrace().toString());
+            throw new RuntimeException(exception);
+        }
     }
 }

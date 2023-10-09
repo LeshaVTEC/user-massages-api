@@ -25,6 +25,16 @@ public class User {
         this.role = UserRole.USER;
     }
 
+    public User(String uuid, String username, String password, String fullName, LocalDate birthday, LocalDateTime registeredDate, UserRole role) {
+        this.uuid = uuid;
+        this.username = username;
+        this.password = password;
+        this.fullName = fullName;
+        this.birthday = birthday;
+        this.registeredDate = registeredDate;
+        this.role = role;
+    }
+
     public String getUuid() {
         return uuid;
     }

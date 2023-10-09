@@ -29,7 +29,7 @@ public class MemoryUserDao implements IUserDao {
         return admin;
     }
 
-   @Override
+    @Override
     public Map<String, User> getRegistrationUsers() {
         return registrationUsers;
     }
