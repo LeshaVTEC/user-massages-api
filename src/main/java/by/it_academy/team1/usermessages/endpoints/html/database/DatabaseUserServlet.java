@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@WebServlet(urlPatterns = "database/api/user")
+@WebServlet(urlPatterns = "/database/api/user")
 public class DatabaseUserServlet extends HttpServlet {
     private static final String USER_PARAM_USERNAME = "username";
     private static final String USER_PARAM_PASSWORD = "password";
