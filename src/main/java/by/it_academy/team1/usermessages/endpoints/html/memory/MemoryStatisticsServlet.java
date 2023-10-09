@@ -1,6 +1,6 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
-import by.it_academy.team1.usermessages.service.StatisticsService;
+import by.it_academy.team1.usermessages.service.memory.MemoryStatisticsService;
 import by.it_academy.team1.usermessages.service.api.IStatisticsService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,14 +10,13 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import static by.it_academy.team1.usermessages.service.StatisticsService.*;
+import static by.it_academy.team1.usermessages.service.memory.MemoryStatisticsService.*;
 
 
 @WebServlet(urlPatterns = "/api/admin/statistics")
-public class StatisticsServlet extends HttpServlet {
+public class MemoryStatisticsServlet extends HttpServlet {
 
-    private final IStatisticsService statisticsService = StatisticsService.getInstance();
-
+    private final IStatisticsService statisticsService = MemoryStatisticsService.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -1,28 +1,28 @@
-package by.it_academy.team1.usermessages.service;
+package by.it_academy.team1.usermessages.service.memory;
 
 import by.it_academy.team1.usermessages.dao.api.IMessageDao;
 import by.it_academy.team1.usermessages.dao.api.IUserDao;
-import by.it_academy.team1.usermessages.dao.factory.MessageDaoFactory;
-import by.it_academy.team1.usermessages.dao.factory.UserDaoFactory;
+import by.it_academy.team1.usermessages.dao.memory.factory.MemoryMessageDaoFactory;
+import by.it_academy.team1.usermessages.dao.memory.factory.MemoryUserDaoFactory;
 import by.it_academy.team1.usermessages.service.api.IStatisticsService;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class StatisticsService implements IStatisticsService {
+public class MemoryStatisticsService implements IStatisticsService {
     public static final String TOTAL_USERS_KEY = "total_registration_users";
     public static final String TOTAL_MESSAGES_KEY = "total_messages";
     public static final String TOTAL_ACTIVE_USERS_KEY = "total_active_sessions";
-    private final static StatisticsService instance = new StatisticsService();
+    private final static MemoryStatisticsService instance = new MemoryStatisticsService();
     private final AtomicInteger sessionCounter;
     private final IUserDao userDao;
     private final IMessageDao messageDao;
 
-    public StatisticsService() {
+    public MemoryStatisticsService() {
         this.sessionCounter = new AtomicInteger(0);
-        this.userDao = UserDaoFactory.getInstance();
-        this.messageDao = MessageDaoFactory.getInstance();
+        this.userDao = MemoryUserDaoFactory.getInstance();
+        this.messageDao = MemoryMessageDaoFactory.getInstance();
     }
     @Override
     public Map<String, Integer> getStats() {
@@ -49,7 +49,7 @@ public class StatisticsService implements IStatisticsService {
     }
 
 
-    public static StatisticsService getInstance() {
+    public static MemoryStatisticsService getInstance() {
         return instance;
     }
 }

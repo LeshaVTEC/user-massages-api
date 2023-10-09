@@ -1,4 +1,4 @@
-package by.it_academy.team1.usermessages.service;
+package by.it_academy.team1.usermessages.service.memory;
 
 import by.it_academy.team1.usermessages.core.dto.MessageDto;
 import by.it_academy.team1.usermessages.core.entity.Message;
@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MessageService implements IMessageService {
+public class MemoryMessageService implements IMessageService {
 
     private IMessageDao dao;
 
-    public MessageService(IMessageDao dao) {
+    public MemoryMessageService(IMessageDao dao) {
         this.dao = dao;
     }
 

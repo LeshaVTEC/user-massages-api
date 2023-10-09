@@ -1,10 +1,10 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
 import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
 import by.it_academy.team1.usermessages.core.entity.Message;
 import by.it_academy.team1.usermessages.core.exceptions.UserNotFoundException;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
-import by.it_academy.team1.usermessages.service.factory.MessageServiceFactory;
+import by.it_academy.team1.usermessages.service.memory.factory.MemoryMessageServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,11 +16,11 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/ui/user/chats")
-public class ChatsServlet  extends HttpServlet {
+public class MemoryChatsServlet extends HttpServlet {
 
     public final IMessageService messageService;
 
-    public ChatsServlet(){ this.messageService = MessageServiceFactory.getInstance();}
+    public MemoryChatsServlet(){ this.messageService = MemoryMessageServiceFactory.getInstance();}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();

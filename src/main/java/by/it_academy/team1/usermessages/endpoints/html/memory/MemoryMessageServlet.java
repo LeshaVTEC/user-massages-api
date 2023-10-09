@@ -1,12 +1,13 @@
-package by.it_academy.team1.usermessages.endpoints.html;
+package by.it_academy.team1.usermessages.endpoints.html.memory;
 
 import by.it_academy.team1.usermessages.core.dto.MessageDto;
 import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
 import by.it_academy.team1.usermessages.core.entity.User;
 import by.it_academy.team1.usermessages.core.exceptions.UserNotFoundException;
-import by.it_academy.team1.usermessages.dao.UserDao;
+import by.it_academy.team1.usermessages.dao.api.IUserDao;
+import by.it_academy.team1.usermessages.dao.memory.MemoryUserDao;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
-import by.it_academy.team1.usermessages.service.factory.MessageServiceFactory;
+import by.it_academy.team1.usermessages.service.memory.factory.MemoryMessageServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,19 +22,10 @@ import java.io.IOException;
  */
 
 @WebServlet("/api/message")
-public class MessageServlet extends HttpServlet {
-
-
+public class MemoryMessageServlet extends HttpServlet {
+    private IMessageService messageService = MemoryMessageServiceFactory.getInstance();
     private static final String RECIPIENT_PARAM_NAME = "recipient";
     private static final String MESSAGE_TEXT_PARAM_NAME = "text";
-
-    private final IMessageService messageService;
-
-
-    public MessageServlet() {
-        this.messageService = MessageServiceFactory.getInstance();
-
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -49,7 +41,7 @@ public class MessageServlet extends HttpServlet {
             // Получите параметры из POST-запроса
             String recipient = req.getParameter(RECIPIENT_PARAM_NAME);
             String messageText = req.getParameter(MESSAGE_TEXT_PARAM_NAME);
-            UserDao check = new UserDao();
+            IUserDao check = new MemoryUserDao();
             // Проверка, зарегистрирован ли получатель
             User recipientUser = check.findUser(recipient);
 

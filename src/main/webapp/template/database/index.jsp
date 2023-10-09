@@ -7,10 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Memory</title>
+    <title>Data Base</title>
 </head>
 <body>
 <h1>Главная страница</h1>
-<a href="http://localhost:8080/user-messages-api/template/ui/signUp/index.jsp">Зарегистрируйтесть</a>
+<a href="http://localhost:8080/user-messages-api/template/database/signUp/index.jsp">Зарегистрируйтесть</a>
 </body>
 </html>

@@ -10,4 +10,6 @@ public interface IUserDao {
     Map<String, User> getRegistrationUsers();
 
     User findUser(String username);
+
+    Boolean existsByUsername(String username);
 }
