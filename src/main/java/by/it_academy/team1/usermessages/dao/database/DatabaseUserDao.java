@@ -48,7 +48,7 @@ public class DatabaseUserDao implements IUserDao {
     }
 
     @Override
-    public Map<Integer, User> getRegistrationUsers() {
+    public Map<String, User> getRegistrationUsers() { // TODO return List<user>
         return null;
     }
 

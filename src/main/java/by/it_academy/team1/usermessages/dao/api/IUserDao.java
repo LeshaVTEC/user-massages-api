@@ -7,7 +7,7 @@ import java.util.Map;
 public interface IUserDao {
     void saveNewUser(User user);
 
-    Map<Integer, User> getRegistrationUsers();
+    Map<String, User> getRegistrationUsers();
 
     User findUser(String username);
 

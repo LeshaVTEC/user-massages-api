@@ -29,4 +29,3 @@ public class DatabaseStatisticsServlet extends HttpServlet {
             getServletContext().getRequestDispatcher("/template/database/admin/statistics/index.jsp").forward(req, resp);
         }
     }
-}

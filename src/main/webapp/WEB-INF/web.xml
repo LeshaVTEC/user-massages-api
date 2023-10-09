@@ -15,4 +15,8 @@
         <url-pattern>*.jsp</url-pattern>
     </servlet-mapping>
 
+    <listener>
+        <listener-class>by.it_academy.team1.usermessages.listeners.ActiveSessionUsersListener</listener-class>
+    </listener>
+
 </web-app>

@@ -14,11 +14,23 @@ public class Message {
     public Message() {
     }
 
+    public String getText() {
+        return text;
+    }
+
+    public LocalDateTime getSentDate() {
+        return sentDate;
+    }
+
     public Message(LocalDateTime sentDate, String usernameFrom, String usernameTo, String text) {
         this.sentDate = sentDate;
         this.usernameFrom = usernameFrom;
         this.usernameTo = usernameTo;
         this.text = text;
+    }
+
+    public String getUsernameTo() {
+        return usernameTo;
     }
 
     public String getUsernameFrom() {

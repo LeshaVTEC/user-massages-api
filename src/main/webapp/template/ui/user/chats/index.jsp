@@ -5,27 +5,33 @@
   Time: 23:40
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!doctype html>
+<html lang="ru">
 <head>
-    <title>Чаты</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ваши сообщения  </title>
 </head>
 <body>
-<h1>Чаты</h1>
-<table>
-    <tr>
-        <th>Дата/время отправки</th>
-        <th>От кого</th>
-        <th>Текст</th>
-    </tr>
-    <c:forEach var="message" items="${messages}">
+<h1>Логин: <c:out value="${requestScope.username}"/> Ваши сообщения </h1>
+<table border="1">
+    <tbody>
+    <c:forEach items="${requestScope.chat}"
+               var="message">
         <tr>
-            <td>${message.sentDate}</td>
-            <td>${message.usernameFrom}</td>
-            <td>${message.text}</td>
+            <td width="20%">${message.getUsernameFrom()}</td>
+            <td width="20%">${message.getSentDate()}</td>
+            <td width="60%"><c:out value="${message.getText()}" escapeXml="true"/></td>
         </tr>
     </c:forEach>
+    </tbody>
 </table>
+<p><input type="button" onclick="location.href='${pageContext.request.contextPath}/template/ui/user/message/';" value="write message" /> </p>
+
 </body>
 </html>

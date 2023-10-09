@@ -2,8 +2,10 @@ package by.it_academy.team1.usermessages.core.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class User {
+    private String uuid = UUID.randomUUID().toString();;
     private String username;
     private String password;
     private String fullName;
@@ -21,6 +23,10 @@ public class User {
         this.birthday = birthday;
         this.registeredDate = LocalDateTime.now();
         this.role = UserRole.USER;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public String getUsername() {
@@ -74,7 +80,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
+                "uuid='" + uuid + '\'' +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", birthday=" + birthday +
@@ -82,5 +89,4 @@ public class User {
                 ", role=" + role +
                 '}';
     }
-
 }

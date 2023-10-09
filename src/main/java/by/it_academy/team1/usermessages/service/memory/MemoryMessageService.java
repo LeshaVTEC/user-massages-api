@@ -5,6 +5,7 @@ import by.it_academy.team1.usermessages.core.entity.Message;
 import by.it_academy.team1.usermessages.dao.api.IMessageDao;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +25,7 @@ public class MemoryMessageService implements IMessageService {
     @Override
     public List<Message> getMessagesOfUser(String username) {
         return this.dao.get().stream()
-                .filter(message -> message.getUsernameFrom().equals(username))
+                .filter(message -> message.getUsernameTo().equals(username))
                 .collect(Collectors.toList());
     }
 
@@ -34,8 +35,8 @@ public class MemoryMessageService implements IMessageService {
         entity.setUsernameTo(message.getUsernameTo());
         entity.setUsernameFrom(message.getUsernameFrom());
         entity.setText(message.getText());
-        entity.setSentDate(message.getSentDate()); // Установите дату/время отправки
+        entity.setSentDate(LocalDateTime.now()); // Установите дату/время отправки
 
-        this.dao.save(entity); // Предполагается, что у вас есть метод сохранения сообщения в DAO
+        this.dao.save(entity);
     }
 }

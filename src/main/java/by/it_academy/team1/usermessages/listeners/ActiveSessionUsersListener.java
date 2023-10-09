@@ -1,34 +1,29 @@
 package by.it_academy.team1.usermessages.listeners;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSessionAttributeListener;
-import javax.servlet.http.HttpSessionBindingEvent;
-import java.util.ArrayList;
-import java.util.List;
+
+import by.it_academy.team1.usermessages.service.memory.MemoryStatisticsService;
+import by.it_academy.team1.usermessages.service.api.IStatisticsService;
+import jakarta.servlet.http.HttpSessionAttributeListener;
+import jakarta.servlet.http.HttpSessionBindingEvent;
 
 public class ActiveSessionUsersListener implements HttpSessionAttributeListener {
+    private final IStatisticsService statisticsService = MemoryStatisticsService.getInstance();
 
-    private static final String TOTAL_USERS_KEY = "totalusers";
 
     @Override
     public void attributeAdded(HttpSessionBindingEvent event) {
-        ServletContext context = event.getSession().getServletContext();
-        Object contextValue = context.getAttribute(TOTAL_USERS_KEY);
-        if (contextValue == null) {
-            context.setAttribute(TOTAL_USERS_KEY, 1);
-        } else {
-            context.setAttribute(
-                    TOTAL_USERS_KEY,
-                    Integer.parseInt(contextValue.toString()) + 1
-            );
+        if("user".equalsIgnoreCase(event.getName()) && event.getValue() != null){
+        var servletContext = event.getSession().getServletContext();
+        servletContext.log("attributeAdded: " + event.getName() + event.getValue());
+            this.statisticsService.incSessionCount();
         }
     }
 
     @Override
     public void attributeRemoved(HttpSessionBindingEvent event) {
-        ServletContext context = event.getSession().getServletContext();
-        Object contextValue = context.getAttribute(TOTAL_USERS_KEY);
-        context.setAttribute(TOTAL_USERS_KEY, Integer.parseInt(contextValue.toString()) - 1);
+        if("user".equalsIgnoreCase(event.getName())){
+            this.statisticsService.decSessionCount();
+        }
     }
 
     @Override
