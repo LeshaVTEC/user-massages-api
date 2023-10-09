@@ -36,7 +36,7 @@ public class MemoryUserLoginServlet extends HttpServlet {
         HttpSession session = req.getSession();
         session.setAttribute("user", userLoginDto);
 
-        resp.sendRedirect("/user-messages-api/template/ui/user/message");
+        resp.sendRedirect("/user-messages-api/template/database/user/message");
         resp.setStatus(200);
     }
 }

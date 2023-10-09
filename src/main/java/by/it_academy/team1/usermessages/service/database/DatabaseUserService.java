@@ -18,7 +18,7 @@ public class DatabaseUserService implements IUserService {
         if(userDao.existsByUsername(username)){
             throw new IllegalArgumentException("Данный Логин уже зарегистрирован, попробуйте другой Логин");
         }
-        return true;
+        return false;
     }
     @Override
     public void saveNewUser(UserRegistrationDto dto) {
@@ -37,7 +37,7 @@ public class DatabaseUserService implements IUserService {
         if (dto.getBirthday() == null) {
             throw new IllegalArgumentException("Нет информации о дате рождения");
         }
-        if (this.existsByUsername(dto.getUsername())) {
+        if (!this.existsByUsername(dto.getUsername())) {
             userDao.saveNewUser(new User(dto.getUsername(), dto.getPassword(), dto.getFullName(), dto.getBirthday()));
         }
     }

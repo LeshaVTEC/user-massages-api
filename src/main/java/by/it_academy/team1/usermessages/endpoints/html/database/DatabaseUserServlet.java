@@ -43,6 +43,13 @@ public class DatabaseUserServlet extends HttpServlet {
         userService.saveNewUser(userRegistrationDto);
         resp.sendRedirect("/user-messages-api/template/database/signIn");
         resp.setStatus(201);
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=utf-8");
+
+        resp.sendRedirect("/user-messages-api/template/database/signUp");
     }
 }
