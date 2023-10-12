@@ -6,6 +6,7 @@ import by.it_academy.team1.usermessages.dao.memory.factory.MemoryMessageDaoFacto
 import by.it_academy.team1.usermessages.dao.memory.factory.MemoryUserDaoFactory;
 import by.it_academy.team1.usermessages.service.api.IStatisticsService;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -25,7 +26,7 @@ public class MemoryStatisticsService implements IStatisticsService {
         this.messageDao = MemoryMessageDaoFactory.getInstance();
     }
     @Override
-    public Map<String, Integer> getStats() {
+    public Map<String, Integer> getStats() throws SQLException {
         Map<String, Integer> stats  = new HashMap<>();
         stats.put(TOTAL_USERS_KEY, this.userDao.getRegistrationUsers().size());
         stats.put(TOTAL_MESSAGES_KEY, this.messageDao.get().size());

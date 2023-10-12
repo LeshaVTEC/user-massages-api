@@ -1,4 +1,4 @@
-package by.it_academy.team1.usermessages.endpoints.html.memory;
+package by.it_academy.team1.usermessages.endpoints.html.database;
 
 import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
 import by.it_academy.team1.usermessages.core.entity.Message;
@@ -16,12 +16,12 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/ui/user/chats")
-public class MemoryChatsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/database/user/chats")
+public class DatabaseChatsServlet extends HttpServlet {
 
     public final IMessageService messageService;
 
-    public MemoryChatsServlet(){ this.messageService = MemoryMessageServiceFactory.getInstance();}
+    public DatabaseChatsServlet(){ this.messageService = MemoryMessageServiceFactory.getInstance();}
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -34,7 +34,7 @@ public class MemoryChatsServlet extends HttpServlet {
             req.setAttribute("username", username);
 
             req.setAttribute("chat", messages);
-            req.getRequestDispatcher("/template/ui/user/chats/").forward(req, resp);
+            req.getRequestDispatcher("/template/database/user/chats/").forward(req, resp);
         } catch (UserNotFoundException | SQLException e){
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             resp.getWriter().write(e.getMessage());
