@@ -5,8 +5,10 @@ import by.it_academy.team1.usermessages.core.dto.UserLoginDto;
 import by.it_academy.team1.usermessages.core.entity.User;
 import by.it_academy.team1.usermessages.core.exceptions.UserNotFoundException;
 import by.it_academy.team1.usermessages.dao.api.IUserDao;
+import by.it_academy.team1.usermessages.dao.database.DatabaseUserDao;
 import by.it_academy.team1.usermessages.dao.memory.MemoryUserDao;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
+import by.it_academy.team1.usermessages.service.database.factory.DatabaseMessageServiceFactory;
 import by.it_academy.team1.usermessages.service.memory.factory.MemoryMessageServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -15,13 +17,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.beans.PropertyVetoException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/database/api/message")
 public class DatabaseMessageServlet extends HttpServlet {
-    private IMessageService messageService = MemoryMessageServiceFactory.getInstance();
+    private IMessageService messageService = DatabaseMessageServiceFactory.getInstance();
     private static final String RECIPIENT_PARAM_NAME = "recipient";
     private static final String MESSAGE_TEXT_PARAM_NAME = "text";
+
+    public DatabaseMessageServlet() throws PropertyVetoException, SQLException, IOException {
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,7 +44,7 @@ public class DatabaseMessageServlet extends HttpServlet {
             // Получите параметры из POST-запроса
             String recipient = req.getParameter(RECIPIENT_PARAM_NAME);
             String messageText = req.getParameter(MESSAGE_TEXT_PARAM_NAME);
-            IUserDao check = new MemoryUserDao();
+            IUserDao check = new DatabaseUserDao();
             // Проверка, зарегистрирован ли получатель
             User recipientUser = check.findUser(recipient);
 
