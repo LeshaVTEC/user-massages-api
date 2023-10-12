@@ -54,7 +54,7 @@ public class DatabaseMessageDao implements IMessageDao {
              PreparedStatement stm = conn.prepareStatement(sql)) {
             stm.setString(1, message.getUsernameFrom());
             stm.setString(2, message.getUsernameTo());
-            stm.setDate(3, Date.valueOf(message.getSentDate().toString()));
+            stm.setObject(3, message.getSentDate());
             stm.setObject(4, message.getText());
             stm.executeUpdate();
 
