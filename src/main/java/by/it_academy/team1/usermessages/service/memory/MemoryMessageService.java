@@ -5,6 +5,7 @@ import by.it_academy.team1.usermessages.core.entity.Message;
 import by.it_academy.team1.usermessages.dao.api.IMessageDao;
 import by.it_academy.team1.usermessages.service.api.IMessageService;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,12 +19,12 @@ public class MemoryMessageService implements IMessageService {
     }
 
     @Override
-    public List<Message> get() {
+    public List<Message> get() throws SQLException {
         return this.dao.get();
     }
 
     @Override
-    public List<Message> getMessagesOfUser(String username) {
+    public List<Message> getMessagesOfUser(String username) throws SQLException {
         return this.dao.get().stream()
                 .filter(message -> message.getUsernameTo().equals(username))
                 .collect(Collectors.toList());

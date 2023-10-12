@@ -4,6 +4,10 @@ import by.it_academy.team1.usermessages.dao.database.factory.DatabaseMessageDaoF
 import by.it_academy.team1.usermessages.service.api.IMessageService;
 import by.it_academy.team1.usermessages.service.database.DatabaseMessageService;
 
+import java.beans.PropertyVetoException;
+import java.io.IOException;
+import java.sql.SQLException;
+
 public class DatabaseMessageServiceFactory {
 
     private volatile static DatabaseMessageService instance;
@@ -11,7 +15,7 @@ public class DatabaseMessageServiceFactory {
     private DatabaseMessageServiceFactory() {
     }
 
-    public static IMessageService getInstance() {
+    public static IMessageService getInstance() throws PropertyVetoException, SQLException, IOException {
         if(instance == null){
             synchronized (DatabaseMessageServiceFactory.class){
                 if(instance == null){
