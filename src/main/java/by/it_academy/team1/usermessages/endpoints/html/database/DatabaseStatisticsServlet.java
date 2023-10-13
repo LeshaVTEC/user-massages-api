@@ -34,6 +34,6 @@ public class DatabaseStatisticsServlet extends HttpServlet {
             throw new RuntimeException(e);
         }
 
-        getServletContext().getRequestDispatcher("/template/database/admin/statistics/index.jsp").forward(req, resp);
+        req.getRequestDispatcher("/template/database/admin/statistics/index.jsp").forward(req, resp);
     }
 }
