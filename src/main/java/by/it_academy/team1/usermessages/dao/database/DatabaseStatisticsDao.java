@@ -32,6 +32,7 @@ public class DatabaseStatisticsDao implements IStatisticsDao {
         try (Connection conn = ds.getConnection();
              PreparedStatement stm = conn.prepareStatement(sql);
              ResultSet resultSet = stm.executeQuery()) {
+            resultSet.next();
             return resultSet.getInt(1);
         }
     }

@@ -1,13 +1,14 @@
 package by.it_academy.team1.usermessages.listeners;
 
 
+import by.it_academy.team1.usermessages.service.database.DatabaseStatisticsService;
 import by.it_academy.team1.usermessages.service.memory.MemoryStatisticsService;
 import by.it_academy.team1.usermessages.service.api.IStatisticsService;
 import jakarta.servlet.http.HttpSessionAttributeListener;
 import jakarta.servlet.http.HttpSessionBindingEvent;
 
 public class ActiveSessionUsersListener implements HttpSessionAttributeListener {
-    private final IStatisticsService statisticsService = MemoryStatisticsService.getInstance();
+    private final IStatisticsService statisticsService = DatabaseStatisticsService.getInstance();
 
 
     @Override
