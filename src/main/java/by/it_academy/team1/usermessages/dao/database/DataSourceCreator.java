@@ -16,7 +16,7 @@ public class DataSourceCreator {
         cpds.setDriverClass("org.postgresql.Driver");
         cpds.setJdbcUrl("jdbc:postgresql://localhost:5432/team_1");
         cpds.setUser("postgres");
-        cpds.setPassword("1234");
+        cpds.setPassword(System.getenv("POSTGRES_PASSWORD"));
         cpds.setMinPoolSize(5);
         cpds.setAcquireIncrement(5);
         cpds.setMaxPoolSize(20);

@@ -16,7 +16,7 @@ public class DatabaseUserDao implements IUserDao {
 
     @Override
     public Boolean existsByUsername(String username) {
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres","1234")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres", System.getenv("POSTGRES_PASSWORD"))) {
             String savePositionSql = "SELECT exists (SELECT 1 FROM user_messages.users WHERE username = ?);";
             try (PreparedStatement preparedStatement = connection.prepareStatement(savePositionSql)) {
                 preparedStatement.setString(1, username);
@@ -34,7 +34,7 @@ public class DatabaseUserDao implements IUserDao {
 
     @Override
     public void saveNewUser(User user) {
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres","1234")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres", System.getenv("POSTGRES_PASSWORD"))) {
             String savePositionSql = "INSERT INTO user_messages.users" +
                     "(id, username, password, full_name, birthday, registration_date, role)" +
                     "VALUES (gen_random_uuid (),?,?,?,?,?,?);";
@@ -57,7 +57,7 @@ public class DatabaseUserDao implements IUserDao {
     @Override
     public Map<String, User> getRegistrationUsers() {
         Map<String, User> registrationUsers= new HashMap();
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres","1234")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres", System.getenv("POSTGRES_PASSWORD"))) {
             String savePositionSql = "SELECT id, username, password, full_name, birthday, registration_date, role " +
                     "FROM user_messages.users;";
             try (PreparedStatement preparedStatement = connection.prepareStatement(savePositionSql)) {
@@ -87,7 +87,7 @@ public class DatabaseUserDao implements IUserDao {
 
     @Override
     public User findUser(String username) {
-        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres","1234")) {
+        try (Connection connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/team_1","postgres", System.getenv("POSTGRES_PASSWORD"))) {
             String savePositionSql = "SELECT id, username, password, full_name, birthday, registration_date, role " +
                     "FROM user_messages.users " +
                     "WHERE username = ?;";
